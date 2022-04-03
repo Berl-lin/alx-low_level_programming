@@ -1,0 +1,1 @@
+Static task readme file
