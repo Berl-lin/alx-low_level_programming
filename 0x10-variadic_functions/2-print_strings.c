@@ -1,34 +1,52 @@
 #include "variadic_functions.h"
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 /**
- * print_strings - prints strings, followed by a new line
- * @separator: string to be printed between the strings
- * @n: number of args
+ * print_strings - print strings with given separator
+ * @separator: delimiter
+ * @n: number of arguments passed
+ *
+ * Return: void function
  */
-
 void print_strings(const char *separator, const unsigned int n, ...)
 {
-	va_list string;
 	unsigned int i;
-	char *c;
-	va_start(string, n);
+	va_list args;
 
-	for (i = 0; i < n; i++)
+	va_start(args, n);
+	if (n != 0)
 	{
-		c = va_arg(string, char*);
-		if (c != NULL)
-			printf("%s", c);
-		else
-			printf("(nil)");
-
-		if (i != n - 1 && separator != NULL)
-			printf("%s", separator);
+		for (i = 0; i < n; i++)
+		{
+			if (i != n - 1)
+			{
+				if (separator != NULL)
+				{
+					printf("%s%s", nil_check(va_arg(args, char *)), separator);
+				}
+				else
+				{
+					printf("%s", nil_check(va_arg(args, char *)));
+				}
+			}
+			else
+			{
+				printf("%s", nil_check(va_arg(args, char *)));
+			}
+		}
 	}
+	printf("\n");
+	va_end(args);
+}
 
-	va_end(string);
-
-	putchar('\n');
+/**
+ * nil_check - print strings with given separator
+ * @s: check if its NULL
+ *
+ * Return: (nil) if null
+ */
+char *nil_check(char *s)
+{
+	if (s == NULL)
+		s = "(nil)";
+	return (s);
 }
