@@ -23,4 +23,4 @@ typedef struct printer
 	void (*print)(va_list arg);
 } printer_t;
 
-#endif
+#endif /*VARIADIC_FUNCTIONSH*/
